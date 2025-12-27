@@ -1,0 +1,1 @@
+# cn-qr-code-generator
