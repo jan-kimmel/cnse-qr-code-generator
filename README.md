@@ -1,1 +1,1 @@
-# cn-qr-code-generator
+# cnse-qr-code-generator
