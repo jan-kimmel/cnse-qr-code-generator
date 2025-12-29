@@ -1,8 +1,8 @@
 package de.hskl.cnseqrcode.service;
 
 import java.time.Instant;
-import java.util.UUID;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
 import de.hskl.cnseqrcode.model.QrCodeEntity;
@@ -19,10 +19,15 @@ public class QrCodeService {
     }
 
     public QrCodeEntity create(String text) {
-        String id = UUID.randomUUID().toString();
-        byte[] png = QrGenerator.generate(text);
-        storageService.save(id, png);
-        QrCodeEntity entity = new QrCodeEntity(id, text, Instant.now());
-        return repository.save(entity);
+        if (text == null || text.isBlank()) {
+            throw new IllegalArgumentException("Text must not be empty");
+        }
+        String id = DigestUtils.sha256Hex(text);
+        return repository.findById(id).orElseGet(() -> {
+            byte[] png = QrGenerator.generate(text);
+            storageService.save(id, png);
+            QrCodeEntity entity = new QrCodeEntity(id, text, Instant.now());
+            return repository.save(entity);
+        });
     }
 }

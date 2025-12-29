@@ -3,24 +3,31 @@ package de.hskl.cnseqrcode.service.impl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import de.hskl.cnseqrcode.service.StorageService;
 
 @Service
 public class LocalStorageService implements StorageService {
-    private static final Path ROOT = Paths.get("data/qrcodes");
+    private final Path storageDir;
 
-    public LocalStorageService() throws IOException {
-        Files.createDirectories(ROOT);
+    public LocalStorageService(@Value("${qr.storage.path}") String storagePath) throws IOException {
+        this.storageDir = Path.of(storagePath);
+        try {
+            if (!Files.exists(storageDir)) {
+                Files.createDirectories(storageDir);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Could not initialize storage directory: " + storagePath, e);
+        }
     }
 
     @Override
     public String save(String id, byte[] data) {
         try {
-            Path file = ROOT.resolve(id + ".png");
+            Path file = storageDir.resolve(id + ".png");
             Files.write(file, data);
             return file.toAbsolutePath().toString();
         } catch (IOException e) {

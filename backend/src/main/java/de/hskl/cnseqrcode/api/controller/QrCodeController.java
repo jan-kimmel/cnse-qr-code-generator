@@ -2,6 +2,7 @@ package de.hskl.cnseqrcode.api.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import de.hskl.cnseqrcode.api.dto.QrCodeRequestDto;
 import de.hskl.cnseqrcode.api.dto.QrCodeResponseDto;
@@ -25,10 +26,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
 @RestController
-@RequestMapping("api/qrcode")
+@RequestMapping("api/qrcodes")
 public class QrCodeController {
     private final QrCodeService qrCodeService;
 
@@ -38,9 +37,19 @@ public class QrCodeController {
 
     @PostMapping
     public ResponseEntity<QrCodeResponseDto> create(@RequestBody QrCodeRequestDto dto) {
-        QrCodeEntity entity = qrCodeService.create(dto.text());
-        QrCodeResponseDto response = new QrCodeResponseDto(entity.getId(), "/qrcodes/" + entity.getId() + ".png");
-        return ResponseEntity.created(URI.create(response.imageURL())).body(response);
+        try {
+            QrCodeEntity entity = qrCodeService.create(dto.text());
+            QrCodeResponseDto response = new QrCodeResponseDto(entity.getId(),
+                ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/api/qrcodes/{id}.png")
+                    .buildAndExpand(entity.getId())
+                    .toUriString());
+            return ResponseEntity.created(URI.create(response.imageURL())).body(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/{id}.png")
