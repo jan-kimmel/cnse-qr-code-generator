@@ -1,5 +1,7 @@
 package de.hskl.cnseqrcode.api.dto;
 
-public record QrCodeRequestDto(String text) {
+import jakarta.validation.constraints.NotBlank;
+
+public record QrCodeRequestDto(@NotBlank String text) {
 
 }
