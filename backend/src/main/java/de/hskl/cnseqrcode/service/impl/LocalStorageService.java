@@ -1,10 +1,13 @@
 package de.hskl.cnseqrcode.service.impl;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 
 import de.hskl.cnseqrcode.service.StorageService;
@@ -32,6 +35,19 @@ public class LocalStorageService implements StorageService {
             return file.toAbsolutePath().toString();
         } catch (IOException e) {
             throw new RuntimeException("Failed to store QR code", e);
+        }
+    }
+
+    @Override
+    public Resource load(String id) {
+        try {
+            Path file = storageDir.resolve(id + ".png");
+            if (!Files.exists(file)) {
+                throw new FileNotFoundException(id);
+            }
+            return new UrlResource(file.toUri());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load QR Code " + id, e);
         }
     }
 }
