@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+</head>
+
+<body>
+    <div class="page">
+        <header>
+            <button id="history-btn">Verlauf</button>
+            <h1>QR Code Generator</h1>
+            <div class="account-btns">
+                <button id="register-btn">Registrieren</button><button id="login-btn">Einloggen</button>
+            </div>
+        </header>
+
+        <form id="qr-form">
+            <input type="text" id="qr-text" placeholder="Text oder URL eingeben" required>
+            <button type="submit">⏎</button>
+        </form>
+
+        <div class="qr-box">
+            <img id="qr-image" alt="QR Code" hidden>
+        </div>
+    </div>
+</body>
+</html>

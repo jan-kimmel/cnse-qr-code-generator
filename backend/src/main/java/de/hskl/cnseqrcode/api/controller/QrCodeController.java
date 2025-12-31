@@ -19,9 +19,11 @@ import java.net.URI;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@CrossOrigin(origins = {"http://localhost:8081", "http://localhost:63342"}) // Docker-Frontend, VSC-Live-Server
 @RestController
 @RequestMapping("api/qrcodes")
 public class QrCodeController {
