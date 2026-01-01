@@ -8,6 +8,7 @@ body {
 }
 
 .page {
+    font-family: sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,7 +18,6 @@ body {
 }
 
 header {
-    font-family: sans-serif;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -54,13 +54,12 @@ header button:hover {
 #qr-form input {
     padding: 16px;
     flex: 1;
-    outline: none;
     border-radius: 9999px;
     font-size: 16px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-#qr-form button {
+#generate-btn {
     margin-left: 10px;
     width: 80px;
     height: 100%;
@@ -73,13 +72,36 @@ header button:hover {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-#qr-form button:hover {
+#generate-btn:hover {
     background-color: limegreen;
+}
+
+#qr-png-download-btn {
+    margin-left: 10px;
+    width: 80px;
+    height: 100%;
+    border-radius: 9999px;
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+    font-size: 30px;
+    transition: background-color 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#qr-png-download-btn:hover {
+    background-color: deepskyblue;
+}
+
+.button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .qr-box {
     width: clamp(360px, 50dvw, 720px);
-    height: auto;
+    height: clamp(360px, 50dvw, 720px);
     background: white;
     border-radius: 27px;
     display: flex;
@@ -89,11 +111,66 @@ header button:hover {
 }
 
 #qr-image {
-    width: 100%;
-    height: auto;
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
 }
 
-.spacer {
-    width: 100dvw;
-    height: 20px;
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 27px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: clamp(300px, 90%, 400px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0
+}
+
+.modal-content input {
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 9999px;
+}
+
+.modal-content button {
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 9999px;
+    background-color: forestgreen;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: limegreen;
+}
+
+.close {
+    align-self: flex-end;
+    font-size: 55px;
+    cursor: pointer;
 }

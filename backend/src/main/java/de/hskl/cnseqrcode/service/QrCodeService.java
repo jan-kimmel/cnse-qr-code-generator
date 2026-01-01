@@ -24,10 +24,14 @@ public class QrCodeService {
         }
         String id = DigestUtils.sha256Hex(text);
         return repository.findById(id).orElseGet(() -> {
-            byte[] png = QrGenerator.generate(text);
+            byte[] png = QrGenerator.generate(text, QrBackground.TRANSPARENT);
             storageService.save(id, png);
             QrCodeEntity entity = new QrCodeEntity(id, text, Instant.now());
             return repository.save(entity);
         });
+    }
+
+    public QrCodeEntity findById(String id) {
+        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("QR code not found: " + id));
     }
 }
