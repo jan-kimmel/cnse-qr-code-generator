@@ -2,7 +2,7 @@ body {
     background: linear-gradient(to bottom right, darkgray, dimgray);
     background-attachment: fixed;
     margin: 0;
-    min-height: 100%;
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
 }
@@ -12,9 +12,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: clamp(700px, 80dvw, 900px);
+    width: 80dvw;
     gap: 20px;
-    min-height: 100dvh;
 }
 
 header {
@@ -41,14 +40,20 @@ header button:hover {
     background-color: lightgray;
 }
 
+.account-btns {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
 .account-btns button {
-    margin-left: 10px;
+    margin: 5px 0 5px 10px;
 }
 
 #qr-form {
     display: flex;
     width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 #qr-form input {
@@ -56,6 +61,7 @@ header button:hover {
     flex: 1;
     border-radius: 9999px;
     font-size: 16px;
+    min-width: 180px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
@@ -100,8 +106,8 @@ header button:hover {
 }
 
 .qr-box {
-    width: clamp(360px, 50dvw, 720px);
-    height: clamp(360px, 50dvw, 720px);
+    width: min(70lvh, 80dvw);
+    height: min(70lvh, 80dvw);
     background: white;
     border-radius: 27px;
     display: flex;
@@ -139,7 +145,7 @@ header button:hover {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: clamp(300px, 90%, 400px);
+    width: min(70dvw, 400px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 

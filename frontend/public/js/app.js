@@ -1,28 +1,31 @@
 import { onAuthChange, getIdToken, login, register, logout } from "./auth.js";
 
+const backendAddress = "http://localhost:8080/api/qrcodes"
+
 function showLoggedInUI(user) {
     const accountBtns = document.querySelector(".account-btns");
-    const historyBtn = document.getElementById("history-btn");
 
-    accountBtns.innerHTML = `<button id="logout-btn">Logout</button>`;
-
-    historyBtn.classList.remove("button-disabled");
+    accountBtns.innerHTML = `
+        <button id="history-btn">Verlauf</button>
+        <button id="logout-btn">Logout</button>
+        `;
 
     document.getElementById("logout-btn").addEventListener("click", async () => {
         await logout();
+    });
+
+    document.getElementById("history-btn").addEventListener("click", async () => {
+        await showHistory();
     });
 }
 
 function showLoggedOutUI() {
     const accountBtns = document.querySelector(".account-btns");
-    const historyBtn = document.getElementById("history-btn");
 
     accountBtns.innerHTML = `
         <button id="register-btn">Registrieren</button>
         <button id="login-btn">Einloggen</button>
     `;
-
-    historyBtn.classList.add("button-disabled");
 
     connectAuthButtons();
 }
@@ -37,12 +40,19 @@ onAuthChange(user => {
     }
 });
 
+function connectAuthButtons() {
+    const loginBtn = document.getElementById("login-btn");
+    const registerBtn = document.getElementById("register-btn");
+
+    if (loginBtn) loginBtn.addEventListener("click", () => openModal("login"));
+    if (registerBtn) registerBtn.addEventListener("click", () => openModal("register"));
+}
 connectAuthButtons();
 
 const qrForm = document.getElementById("qr-form");
 const qrText = document.getElementById("qr-text");
 const qrImage = document.getElementById("qr-image");
-const qrPngDownload = document.getElementById("qr-png-download-btn")
+const qrPngDownload = document.getElementById("qr-png-download-btn");
 let currentQrId = null;
 
 qrText.focus();
@@ -50,11 +60,14 @@ qrText.focus();
 qrForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8080/api/qrcodes", {
+    const token = await getIdToken();
+
+    const headers = {"Content-Type": "application/json"};
+    if (token) headers["Authorization"] = `Bearer ${token}`;
+
+    const response = await fetch(backendAddress, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers,
         body: JSON.stringify({text: qrText.value})
     });
 
@@ -76,7 +89,7 @@ qrPngDownload.addEventListener("click", (e) => {
         return;
     }
 
-    const downloadUrl = `http://localhost:8080/api/qrcodes/${currentQrId}/download.png`;
+    const downloadUrl = `${backendAddress}/${currentQrId}/download.png`;
 
     const link = document.createElement("a");
     link.href = downloadUrl;
@@ -85,6 +98,44 @@ qrPngDownload.addEventListener("click", (e) => {
     link.click();
     document.body.removeChild(link);
 });
+
+async function showHistory() {
+    const token = await getIdToken();
+
+    if (!token) {
+        alert("Nicht eingeloggt!");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${backendAddress}/history`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Fehler beim Laden des Verlaufs");
+        }
+
+        const data = await response.json();
+
+        console.log("Verlauf:", data);
+
+        const historyContainer = document.getElementById("history-container");
+        if (historyContainer) {
+            historyContainer.innerHTML = data.map(item => `
+                <div class="history-item">
+                    <img src="${item.imageURL}" alt="QR Code">
+                    <p>${new Date(item.createdAt).toLocaleString()}</p>
+                </div>
+            `).join("");
+        }
+
+    } catch (err) {
+        alert(err.message);
+    }
+}
 
 
 
@@ -108,14 +159,6 @@ function openModal(mode) {
 
 closeModal.addEventListener("click", () => authModal.classList.add("hidden"));
 authModal.addEventListener("click", e => { if(e.target === authModal) authModal.classList.add("hidden"); });
-
-function connectAuthButtons() {
-    const loginBtn = document.getElementById("login-btn");
-    const registerBtn = document.getElementById("register-btn");
-
-    if (loginBtn) loginBtn.addEventListener("click", () => openModal("login"));
-    if (registerBtn) registerBtn.addEventListener("click", () => openModal("register"));
-}
 
 modalSubmit.addEventListener("click", async () => {
     const email = modalEmail.value.trim();

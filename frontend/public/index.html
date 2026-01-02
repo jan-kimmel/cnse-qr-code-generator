@@ -11,10 +11,10 @@
 <body>
     <div class="page">
         <header>
-            <button id="history-btn" class="button-disabled">Verlauf</button>
             <h1>QR Code Generator</h1>
             <div class="account-btns">
-                <button id="register-btn">Registrieren</button><button id="login-btn">Einloggen</button>
+                <button id="register-btn">Registrieren</button>
+                <button id="login-btn">Einloggen</button>
             </div>
         </header>
 
@@ -27,6 +27,8 @@
         <div class="qr-box">
             <img id="qr-image" alt="QR Code" hidden>
         </div>
+
+        <div id="history-container"></div>
 
         <div id="auth-modal" class="modal hidden">
             <div class="modal-content">
