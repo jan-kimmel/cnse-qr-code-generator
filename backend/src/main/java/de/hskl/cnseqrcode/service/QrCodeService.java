@@ -1,6 +1,7 @@
 package de.hskl.cnseqrcode.service;
 
 import java.time.Instant;
+import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class QrCodeService {
         this.storageService = storageService;
     }
 
-    public QrCodeEntity create(String text) {
+    public QrCodeEntity create(String text, String userId) {
         if (text == null || text.isBlank()) {
             throw new IllegalArgumentException("Text must not be empty");
         }
@@ -26,12 +27,16 @@ public class QrCodeService {
         return repository.findById(id).orElseGet(() -> {
             byte[] png = QrGenerator.generate(text, QrBackground.TRANSPARENT);
             storageService.save(id, png);
-            QrCodeEntity entity = new QrCodeEntity(id, text, Instant.now());
+            QrCodeEntity entity = new QrCodeEntity(id, userId, text, Instant.now());
             return repository.save(entity);
         });
     }
 
     public QrCodeEntity findById(String id) {
         return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("QR code not found: " + id));
+    }
+
+    public List<QrCodeEntity> findAllByUser(String userId) {
+        return repository.findAllByUserId(userId);
     }
 }
