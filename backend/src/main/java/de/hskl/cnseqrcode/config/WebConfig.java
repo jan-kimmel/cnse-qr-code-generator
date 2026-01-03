@@ -9,7 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("http://localhost:8081", "http://localhost:63342")
+                .allowedOrigins("http://localhost:63342", "http://localhost:8081", "http://192.168.178.40:8081") // VSC Live-Server, Docker, Docker(extern)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);

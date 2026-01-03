@@ -1,6 +1,6 @@
 import { onAuthChange, getIdToken, login, register, logout } from "./auth.js";
 
-const backendAddress = "http://localhost:8080/api/qrcodes"
+const backendAddress = "http://192.168.178.40:8080/api/qrcodes"
 
 function showLoggedInUI(user) {
     const accountBtns = document.querySelector(".account-btns");
