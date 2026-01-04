@@ -28,8 +28,6 @@
             <img id="qr-image" alt="QR Code" hidden>
         </div>
 
-        <div id="history-container"></div>
-
         <div id="auth-modal" class="modal hidden">
             <div class="modal-content">
                 <div class="modal-header">
@@ -41,6 +39,16 @@
                 <button id="modal-submit">Einloggen</button>
             </div>
         </div>
+
+        <div id="history-drawer" class="drawer hidden">
+            <div class="drawer-header">
+                <h2 id="history-title">Verlauf</h2>
+                <span id="close-history" class="close">&#x00D7;</span>
+            </div>
+            <ul id="history-list"></ul>
+        </div>
+
+        <div id="drawer-overlay" class="overlay hidden"></div>
     </div>
 </body>
 </html>

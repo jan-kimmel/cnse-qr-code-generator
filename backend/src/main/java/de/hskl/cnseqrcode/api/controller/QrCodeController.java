@@ -47,6 +47,7 @@ public class QrCodeController {
 
         QrCodeResponseDto response = new QrCodeResponseDto(
             entity.getId(),
+            entity.getText(),
             ServletUriComponentsBuilder
                 .fromCurrentContextPath()
                 .path("/api/qrcodes/{id}.png")
@@ -74,21 +75,13 @@ public class QrCodeController {
     }
     
     @GetMapping("/history")
-    public List<QrCodeResponseDto> getHistory(HttpServletRequest request) {
+    public List<String> getHistory(HttpServletRequest request) {
         String userId = (String) request.getAttribute("userId");
 
         if (userId == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Bitte einloggen");
         }
         
-        List<QrCodeResponseDto> qrCodeList = qrCodeService.findAllByUser(userId)
-            .stream().map(entity -> new QrCodeResponseDto(
-                entity.getId(),
-                ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/api/qrcodes/{id}.png")
-                    .buildAndExpand(entity.getId())
-                    .toUriString(),
-                    entity.getCreatedAt())).toList();
-        return qrCodeList;
+        return qrCodeService.findAllByUser(userId).stream().map(QrCodeEntity::getText).toList();
     }
 }

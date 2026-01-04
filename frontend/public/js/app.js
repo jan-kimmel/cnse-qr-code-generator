@@ -17,6 +17,9 @@ function showLoggedInUI(user) {
     document.getElementById("history-btn").addEventListener("click", async () => {
         await showHistory();
     });
+    document.getElementById("history-btn").onclick = showHistory;
+    document.getElementById("close-history").onclick = closeDrawer;
+    overlay.onclick = closeDrawer;
 }
 
 function showLoggedOutUI() {
@@ -99,44 +102,6 @@ qrPngDownload.addEventListener("click", (e) => {
     document.body.removeChild(link);
 });
 
-async function showHistory() {
-    const token = await getIdToken();
-
-    if (!token) {
-        alert("Nicht eingeloggt!");
-        return;
-    }
-
-    try {
-        const response = await fetch(`${backendAddress}/history`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error("Fehler beim Laden des Verlaufs");
-        }
-
-        const data = await response.json();
-
-        console.log("Verlauf:", data);
-
-        const historyContainer = document.getElementById("history-container");
-        if (historyContainer) {
-            historyContainer.innerHTML = data.map(item => `
-                <div class="history-item">
-                    <img src="${item.imageURL}" alt="QR Code">
-                    <p>${new Date(item.createdAt).toLocaleString()}</p>
-                </div>
-            `).join("");
-        }
-
-    } catch (err) {
-        alert(err.message);
-    }
-}
-
 
 
 const authModal = document.getElementById("auth-modal");
@@ -182,3 +147,62 @@ modalSubmit.addEventListener("click", async () => {
         alert(`${modalMode === "login" ? "Login" : "Registrierung"} fehlgeschlagen: ${err.message}`);
     }
 });
+
+
+
+const drawer = document.getElementById("history-drawer");
+const overlay = document.getElementById("drawer-overlay");
+
+function openDrawer() {
+  drawer.classList.add("open");
+  drawer.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+}
+
+function closeDrawer() {
+  drawer.classList.remove("open");
+  overlay.classList.add("hidden");
+  setTimeout(() => drawer.classList.add("hidden"), 300);
+}
+
+
+async function showHistory() {
+  openDrawer();
+
+  const token = await getIdToken();
+
+  const res = await fetch(`${backendAddress}/history`, {
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  });
+
+  if (!res.ok) {
+    alert("Bitte einloggen");
+    return;
+  }
+
+  const history = await res.json();
+  const list = document.getElementById("history-list");
+  list.innerHTML = "";
+
+  history.forEach(text => {
+    const li = document.createElement("li");
+    li.textContent = text;
+
+    li.onclick = () => {
+      selectHistoryItem(text);
+    };
+
+    list.appendChild(li);
+  });
+}
+
+function selectHistoryItem(text) {
+  closeDrawer();
+
+  const input = document.getElementById("qr-text");
+  input.value = text;
+
+  qrForm.requestSubmit();
+}
