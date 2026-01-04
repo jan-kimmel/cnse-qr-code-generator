@@ -5,6 +5,7 @@ on:
 
 env:
   JAVA_VERSION: '25'
+  FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
 jobs:
   build-and-test:

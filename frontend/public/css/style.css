@@ -1,0 +1,238 @@
+body {
+    background: linear-gradient(to bottom right, darkgray, dimgray);
+    background-attachment: fixed;
+    margin: 0;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+}
+
+.page {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80dvw;
+    gap: 20px;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+header button {
+    padding: 16px;
+    height: 54px;
+    background-color: white;
+    color: black;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+header button:hover {
+    background-color: lightgray;
+}
+
+.account-btns {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.account-btns button {
+    margin: 5px 0 5px 10px;
+}
+
+#qr-form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#qr-form input {
+    padding: 16px;
+    flex: 1;
+    border-radius: 9999px;
+    font-size: 16px;
+    min-width: 180px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#generate-btn {
+    margin-left: 10px;
+    width: 80px;
+    height: 100%;
+    border-radius: 9999px;
+    background-color: forestgreen;
+    color: white;
+    cursor: pointer;
+    font-size: 30px;
+    transition: background-color 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#generate-btn:hover {
+    background-color: limegreen;
+}
+
+#qr-png-download-btn {
+    margin-left: 10px;
+    width: 80px;
+    height: 100%;
+    border-radius: 9999px;
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+    font-size: 30px;
+    transition: background-color 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#qr-png-download-btn:hover {
+    background-color: deepskyblue;
+}
+
+.button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.qr-box {
+    width: min(70lvh, 80dvw);
+    height: min(70lvh, 80dvw);
+    background: white;
+    border-radius: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#qr-image {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 27px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: min(70dvw, 400px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0
+}
+
+.modal-content input {
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 9999px;
+}
+
+.modal-content button {
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 9999px;
+    background-color: forestgreen;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: limegreen;
+}
+
+.close {
+    align-self: flex-end;
+    font-size: 55px;
+    cursor: pointer;
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    max-width: 90vw;
+    height: 100%;
+    background: #fff;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+#history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+}
+
+#history-list li {
+    width:fit-content;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+#history-list li:hover {
+    background: #f5f5f5;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.hidden {
+    display: none;
+}
