@@ -1,5 +1,42 @@
-{"properties": [{
-  "name": "qr.storage.path",
-  "type": "java.lang.String",
-  "description": "A description for 'qr.storage.path'"
-}]}
+{"properties": [
+  {
+    "name": "app.storage.bucket",
+    "type": "java.lang.String",
+    "description": "A description for 'app.storage.bucket'"
+  },
+  {
+    "name": "minio.url",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.url'"
+  },
+  {
+    "name": "minio.access-key",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.access-key'"
+  },
+  {
+    "name": "minio.secret-key",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.secret-key'"
+  },
+  {
+    "name": "firestore.emulator-host",
+    "type": "java.lang.String",
+    "description": "A description for 'firestore.emulator-host'"
+  },
+  {
+    "name": "firestore.project-id",
+    "type": "java.lang.String",
+    "description": "A description for 'firestore.project-id'"
+  },
+  {
+    "name": "app.storage.path",
+    "type": "java.lang.String",
+    "description": "A description for 'app.storage.path'"
+  },
+  {
+    "name": "google.cloud.project-id",
+    "type": "java.lang.String",
+    "description": "A description for 'google.cloud.project-id'"
+  }
+]}

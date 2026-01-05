@@ -5,12 +5,17 @@ services:
     ports:
       - "8080:8080"
     environment:
-      FIREBASE_CREDENTIALS: ${FIREBASE_CREDENTIALS}
-      FIRESTORE_EMULATOR_HOST: ${FIRESTORE_EMULATOR_HOST}
+      SPRING_PROFILES_ACTIVE: docker
+      
+      FIRESTORE_EMULATOR_HOST: firestore:8080
       FIRESTORE_PROJECT_ID: ${FIRESTORE_PROJECT_ID}
-      STORAGE_ENDPOINT: ${STORAGE_ENDPOINT}
-      SPRING_SECURITY_USER_NAME: ${SPRING_SECURITY_USER_NAME}
-      SPRING_SECURITY_USER_PASSWORD: ${SPRING_SECURITY_USER_PASSWORD}
+      
+      MINIO_URL: http://storage:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      QR_STORAGE_BUCKET: qr-codes
+      
+      FIREBASE_CREDENTIALS: ${FIREBASE_CREDENTIALS}
     depends_on:
       firestore:
         condition: service_started
@@ -59,7 +64,6 @@ services:
       timeout: 3s
       retries: 3
     
-      
 volumes:
   minio-data:
   firestore-data:
