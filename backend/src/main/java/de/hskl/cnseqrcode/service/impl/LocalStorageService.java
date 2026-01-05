@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,11 @@ import org.springframework.stereotype.Service;
 import de.hskl.cnseqrcode.service.StorageService;
 
 @Service
+@Profile("local")
 public class LocalStorageService implements StorageService {
     private final Path storageDir;
 
-    public LocalStorageService(@Value("${qr.storage.path}") String storagePath) throws IOException {
+    public LocalStorageService(@Value("${app.storage.path}") String storagePath) {
         this.storageDir = Path.of(storagePath);
         try {
             if (!Files.exists(storageDir)) {
