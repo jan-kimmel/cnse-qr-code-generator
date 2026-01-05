@@ -5,45 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
     <link rel="stylesheet" href="css/style.css">
-    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/main.js"></script>
 </head>
 
 <body>
     <div class="page">
         <header>
-            <h1>QR Code Generator</h1>
+            <h1 class="title">QR Code Generator</h1>
             <div class="account-btns">
                 <button id="register-btn">Registrieren</button>
                 <button id="login-btn">Einloggen</button>
             </div>
         </header>
 
-        <form id="qr-form">
+        <form id="qr-form" class="row">
             <input type="text" id="qr-text" placeholder="Text oder URL eingeben" required>
-            <button type="submit" id="generate-btn">&#x23CE;</button>
-            <button type="button" id="qr-png-download-btn" class="button-disabled">&#x2913;</button>
+            <div id="qr-btns" class="button-group">
+                <button type="submit" id="generate-btn">&#x23CE;</button>
+                <button type="button" id="qr-png-download-btn" class="button-disabled" disabled>&#x2913;</button>
+            </div>
         </form>
 
         <div class="qr-box">
-            <img id="qr-image" alt="QR Code" hidden>
+            <img id="qr-image" class="hidden" alt="QR Code">
         </div>
 
         <div id="auth-modal" class="modal hidden">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 id="modal-title">Einloggen</h2>
-                    <span id="close-modal" class="close">&#x00D7;</span>
+                    <h2 id="modal-title" class="title">Einloggen</h2>
+                    <button id="close-modal">&#x00D7;</button>
                 </div>
-                <input type="email" id="modal-email" placeholder="Email" required>
-                <input type="password" id="modal-password" placeholder="Passwort" required>
-                <button id="modal-submit">Einloggen</button>
+                <form id="auth-form">
+                    <input type="email" id="modal-email" placeholder="Email" required>
+                    <input type="password" id="modal-password" placeholder="Passwort" required>
+                    <button type="submit" id="modal-submit">Einloggen</button>
+                </form>
             </div>
         </div>
 
         <div id="history-drawer" class="drawer hidden">
             <div class="drawer-header">
-                <h2 id="history-title">Verlauf</h2>
-                <span id="close-history" class="close">&#x00D7;</span>
+                <h2 id="history-title" class="title">Verlauf</h2>
+                <button id="close-history">&#x00D7;</button>
             </div>
             <ul id="history-list"></ul>
         </div>
