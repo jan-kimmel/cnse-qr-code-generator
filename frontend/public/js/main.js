@@ -11,26 +11,22 @@ class App {
     }
 
     initComponents() {
-        // QR Generator
         this.qrGenerator = new QrGenerator(
             document.getElementById("qr-form"),
             document.getElementById("qr-image"),
             document.getElementById("qr-png-download-btn")
         );
 
-        // Auth Modal
         this.authModal = new AuthModal(
             document.getElementById("auth-modal")
         );
 
-        // History Drawer
         this.historyDrawer = new HistoryDrawer(
             document.getElementById("history-drawer"),
             document.getElementById("drawer-overlay"),
             (text) => this.qrGenerator.setTextAndGenerate(text)
         );
 
-        // Auth Buttons
         this.authButtons = new AuthButtons(
             document.querySelector(".account-btns"),
             () => this.authModal.open("login"),
@@ -55,7 +51,6 @@ class App {
     }
 }
 
-// App starten
 document.addEventListener("DOMContentLoaded", () => {
     new App();
 });

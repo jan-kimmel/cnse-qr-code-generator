@@ -1,12 +1,10 @@
-const API_BASE_URL = "http://192.168.178.40:8080/api/qr-codes";
-
 export async function createQrCode(text, token) {
     const headers = { "Content-Type": "application/json" };
     if (token) {
         headers["Authorization"] = `Bearer ${token}`;
     }
 
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch("/api/qr-codes", {
         method: "POST",
         headers,
         body: JSON.stringify({ text })
@@ -20,7 +18,7 @@ export async function createQrCode(text, token) {
 }
 
 export async function getQrCodeHistory(token) {
-    const response = await fetch(`${API_BASE_URL}/history`, {
+    const response = await fetch("/api/qr-codes/history", {
         headers: {
             "Authorization": `Bearer ${token}`
         }
@@ -34,9 +32,9 @@ export async function getQrCodeHistory(token) {
 }
 
 export function getQrCodeImageUrl(id) {
-    return `${API_BASE_URL}/${id}/image`;
+    return `/api/qr-codes/${id}/image`;
 }
 
 export function getQrCodeDownloadUrl(id) {
-    return `${API_BASE_URL}/${id}/download`;
+    return `/api/qr-codes/${id}/download`;
 }
