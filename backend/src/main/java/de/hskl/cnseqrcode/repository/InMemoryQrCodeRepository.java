@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import de.hskl.cnseqrcode.model.QrCodeEntity;
 
 @Repository
-@Profile("local")
+@Profile({"local", "test"})
 public class InMemoryQrCodeRepository implements QrCodeRepository {
     private final Map<String, QrCodeEntity> storage = new ConcurrentHashMap<>();
 

@@ -38,5 +38,20 @@
     "name": "google.cloud.project-id",
     "type": "java.lang.String",
     "description": "A description for 'google.cloud.project-id'"
+  },
+  {
+    "name": "spring.cloud.gcp.firestore.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.gcp.firestore.enabled'"
+  },
+  {
+    "name": "spring.cloud.gcp.storage.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.gcp.storage.enabled'"
+  },
+  {
+    "name": "spring.cloud.gcp.core.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.gcp.core.enabled'"
   }
 ]}

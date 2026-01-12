@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import de.hskl.cnseqrcode.service.StorageService;
 
 @Service
-@Profile("local")
+@Profile({"local", "test"})
 public class LocalStorageService implements StorageService {
     private final Path storageDir;
 

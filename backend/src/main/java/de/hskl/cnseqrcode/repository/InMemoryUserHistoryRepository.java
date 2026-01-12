@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import de.hskl.cnseqrcode.model.UserHistoryEntity;
 
 @Repository
-@Profile("local")
+@Profile({"local", "test"})
 public class InMemoryUserHistoryRepository implements UserHistoryRepository {
     private final Map<String, List<UserHistoryEntity>> storage = new ConcurrentHashMap<>();
 
