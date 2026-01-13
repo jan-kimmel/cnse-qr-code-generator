@@ -21,8 +21,9 @@ export class QrGenerator {
     async handleSubmit(event) {
         event.preventDefault();
 
-        const text = this.textInput.value.trim();
-        if (!text) return;
+        const rawText = this.textInput.value.trim();
+        if (!rawText) return;
+        const text = this.normalizeUrl(rawText);
 
         try {
             const token = await getIdToken();
@@ -33,6 +34,15 @@ export class QrGenerator {
         } catch (error) {
             console.error("Error creating QR code:", error);
             alert("Fehler beim Erstellen des QR-Codes");
+        }
+    }
+
+    normalizeUrl(text) {
+        try {
+            const url = new URL(text);
+            return url.href;
+        } catch {
+            return text;
         }
     }
 

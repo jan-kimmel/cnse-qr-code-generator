@@ -19,7 +19,7 @@ import java.io.IOException;
 @Configuration
 public class StorageConfig {
     @Bean
-    @Profile({"dev", "docker"})
+    @Profile("dev")
     public Firestore firestoreEmulator(
         @Value("${firestore.emulator-host}") String emulatorHost,
         @Value("${firestore.project-id}") String projectId) {
@@ -51,8 +51,9 @@ public class StorageConfig {
         return options.getService();
     }
     
+    
     @Bean
-    @Profile({"dev", "docker"})
+    @Profile("dev")
     public MinioClient minioClient(
         @Value("${minio.url}") String url,
         @Value("${minio.access-key}") String accessKey,

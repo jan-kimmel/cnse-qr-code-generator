@@ -4,7 +4,7 @@ export async function createQrCode(text, token) {
         headers["Authorization"] = `Bearer ${token}`;
     }
 
-    const response = await fetch("/api/qr-codes", {
+    const response = await fetch(`${window.BACKEND_URL}/api/qr-codes`, {
         method: "POST",
         headers,
         body: JSON.stringify({ text })
@@ -18,7 +18,7 @@ export async function createQrCode(text, token) {
 }
 
 export async function getQrCodeHistory(token) {
-    const response = await fetch("/api/qr-codes/history", {
+    const response = await fetch(`${window.BACKEND_URL}/api/qr-codes/history`, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
@@ -32,9 +32,9 @@ export async function getQrCodeHistory(token) {
 }
 
 export function getQrCodeImageUrl(id) {
-    return `/api/qr-codes/${id}/image`;
+    return `${window.BACKEND_URL}/api/qr-codes/${id}/image`;
 }
 
 export function getQrCodeDownloadUrl(id) {
-    return `/api/qr-codes/${id}/download`;
+    return `${window.BACKEND_URL}/api/qr-codes/${id}/download`;
 }

@@ -1,8 +1,18 @@
 {"properties": [
   {
+    "name": "allowed.origins",
+    "type": "java.lang.String",
+    "description": "A description for 'allowed.origins'"
+  },
+  {
     "name": "app.storage.bucket",
     "type": "java.lang.String",
     "description": "A description for 'app.storage.bucket'"
+  },
+  {
+    "name": "google.cloud.project-id",
+    "type": "java.lang.String",
+    "description": "A description for 'google.cloud.project-id'"
   },
   {
     "name": "minio.url",
@@ -30,16 +40,6 @@
     "description": "A description for 'firestore.project-id'"
   },
   {
-    "name": "app.storage.path",
-    "type": "java.lang.String",
-    "description": "A description for 'app.storage.path'"
-  },
-  {
-    "name": "google.cloud.project-id",
-    "type": "java.lang.String",
-    "description": "A description for 'google.cloud.project-id'"
-  },
-  {
     "name": "spring.cloud.gcp.firestore.enabled",
     "type": "java.lang.String",
     "description": "A description for 'spring.cloud.gcp.firestore.enabled'"
@@ -53,5 +53,10 @@
     "name": "spring.cloud.gcp.core.enabled",
     "type": "java.lang.String",
     "description": "A description for 'spring.cloud.gcp.core.enabled'"
+  },
+  {
+    "name": "app.storage.path",
+    "type": "java.lang.String",
+    "description": "A description for 'app.storage.path'"
   }
 ]}

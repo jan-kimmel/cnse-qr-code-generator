@@ -18,7 +18,7 @@ import de.hskl.cnseqrcode.service.StorageService;
 public class LocalStorageService implements StorageService {
     private final Path storageDir;
 
-    public LocalStorageService(@Value("${app.storage.path}") String storagePath) {
+    public LocalStorageService(@Value("${app.storage.path:/tmp/qr-codes}") String storagePath) {
         this.storageDir = Path.of(storagePath);
         try {
             if (!Files.exists(storageDir)) {

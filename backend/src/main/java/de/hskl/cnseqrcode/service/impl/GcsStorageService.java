@@ -22,7 +22,7 @@ public class GcsStorageService implements StorageService {
     
     public GcsStorageService(
         Storage storage,
-        @Value("${qr.storage.bucket}") String bucketName) {
+        @Value("${app.storage.bucket}") String bucketName) {
         this.storage = storage;
         this.bucketName = bucketName;
     }
