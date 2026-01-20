@@ -1,4 +1,4 @@
-package de.hskl.cnseqrcode.service.impl;
+package de.hskl.cnseqrcode.service.StorageServiceImpl;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -16,7 +16,7 @@ import io.minio.PutObjectArgs;
 import io.minio.StatObjectArgs;
 
 @Service
-@Profile({"dev", "docker"})
+@Profile("dev")
 public class MinioStorageService implements StorageService {
     
     private final MinioClient minioClient;

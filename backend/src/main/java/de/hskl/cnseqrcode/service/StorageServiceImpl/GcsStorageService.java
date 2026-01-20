@@ -1,4 +1,4 @@
-package de.hskl.cnseqrcode.service.impl;
+package de.hskl.cnseqrcode.service.StorageServiceImpl;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;

@@ -13,7 +13,7 @@ import com.google.cloud.firestore.Firestore;
 import de.hskl.cnseqrcode.model.QrCodeEntity;
 
 @Repository
-@Profile({"dev", "prod", "docker"})
+@Profile({"dev", "prod"})
 public class FirestoreQrCodeRepository implements QrCodeRepository {
     
     private final Firestore firestore;

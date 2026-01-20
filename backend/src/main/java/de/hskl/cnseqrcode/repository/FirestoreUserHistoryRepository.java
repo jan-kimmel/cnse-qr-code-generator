@@ -19,7 +19,7 @@ import com.google.cloud.firestore.SetOptions;
 import de.hskl.cnseqrcode.model.UserHistoryEntity;
 
 @Repository
-@Profile({"dev", "prod", "docker"})
+@Profile({"dev", "prod"})
 public class FirestoreUserHistoryRepository implements UserHistoryRepository {
     
     private final Firestore firestore;
