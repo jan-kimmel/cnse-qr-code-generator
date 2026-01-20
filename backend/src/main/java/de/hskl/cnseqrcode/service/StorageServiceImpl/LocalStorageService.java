@@ -1,4 +1,4 @@
-package de.hskl.cnseqrcode.service.impl;
+package de.hskl.cnseqrcode.service.StorageServiceImpl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import de.hskl.cnseqrcode.service.StorageService;
 
 @Service
-@Profile({"local", "test"})
+@Profile("test")
 public class LocalStorageService implements StorageService {
     private final Path storageDir;
 
