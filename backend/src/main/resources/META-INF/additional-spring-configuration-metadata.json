@@ -1,5 +1,62 @@
-{"properties": [{
-  "name": "qr.storage.path",
-  "type": "java.lang.String",
-  "description": "A description for 'qr.storage.path'"
-}]}
+{"properties": [
+  {
+    "name": "allowed.origins",
+    "type": "java.lang.String",
+    "description": "A description for 'allowed.origins'"
+  },
+  {
+    "name": "app.storage.bucket",
+    "type": "java.lang.String",
+    "description": "A description for 'app.storage.bucket'"
+  },
+  {
+    "name": "google.cloud.project-id",
+    "type": "java.lang.String",
+    "description": "A description for 'google.cloud.project-id'"
+  },
+  {
+    "name": "minio.url",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.url'"
+  },
+  {
+    "name": "minio.access-key",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.access-key'"
+  },
+  {
+    "name": "minio.secret-key",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.secret-key'"
+  },
+  {
+    "name": "firestore.emulator-host",
+    "type": "java.lang.String",
+    "description": "A description for 'firestore.emulator-host'"
+  },
+  {
+    "name": "firestore.project-id",
+    "type": "java.lang.String",
+    "description": "A description for 'firestore.project-id'"
+  },
+  {
+    "name": "spring.cloud.gcp.firestore.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.gcp.firestore.enabled'"
+  },
+  {
+    "name": "spring.cloud.gcp.storage.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.gcp.storage.enabled'"
+  },
+  {
+    "name": "spring.cloud.gcp.core.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.gcp.core.enabled'"
+  },
+  {
+    "name": "app.storage.path",
+    "type": "java.lang.String",
+    "description": "A description for 'app.storage.path'"
+  }
+]}

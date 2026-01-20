@@ -1,20 +1,15 @@
 package de.hskl.cnseqrcode.model;
 
-import java.time.Instant;
-
 public class QrCodeEntity {
     private String id;
-    private String userId;
     private String text;
-    private Instant createdAt;
+    private String storageUrl;
 
-    public QrCodeEntity(String id, String userId, String text, Instant createdAt) {
+    public QrCodeEntity() {}
+    public QrCodeEntity(String id, String text, String storageUrl) {
         this.id = id;
-        this.userId = userId;
         this.text = text;
-        this.createdAt = createdAt;
-    }
-    public QrCodeEntity() {
+        this.storageUrl = storageUrl;
     }
     
     public String getId() {
@@ -23,22 +18,16 @@ public class QrCodeEntity {
     public void setId(String id) {
         this.id = id;
     }
-    public String getUserId() {
-        return userId;
-    }
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
     public String getText() {
         return text;
     }
     public void setText(String text) {
         this.text = text;
     }
-    public Instant getCreatedAt() {
-        return createdAt;
+    public String getStorageUrl() {
+        return storageUrl;
     }
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
+    public void setStorageUrl(String storageUrl) {
+        this.storageUrl = storageUrl;
     }
 }
