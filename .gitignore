@@ -60,4 +60,5 @@ build/
 .env
 .env.production
 
-cnse-qr-code-generator-firebase-adminsdk-fbsvc-4272e0126f.json
+firebase/*.json
+backend/firebase/*.json
