@@ -62,3 +62,6 @@ build/
 
 firebase/*.json
 backend/firebase/*.json
+
+cloud/*.json
+backend/cloud/*.json
