@@ -139,6 +139,7 @@ docker push gcr.io/cnse-qr-code-generator/backend:latest
 
 # Zu Cloud Run deployen
 gcloud run deploy backend-service --image gcr.io/cnse-qr-code-generator/backend:latest --platform managed --region europe-west1 --allow-unauthenticated --set-secrets="/secrets/firebase/credentials.json=firebase-credentials:latest" --set-env-vars="SPRING_PROFILES_ACTIVE=prod,GCP_PROJECT_ID=cnse-qr-code-generator,GCS_BUCKET=cnse-qr-code-generator-qr-codes,FIREBASE_CREDENTIALS_PATH=/secrets/firebase/credentials.json,ALLOWED_ORIGINS=https://frontend-service-162846799968.europe-west1.run.app"
+# --min-instances 1   optional gegen cold starts
 ```
 
 **Frontend**
